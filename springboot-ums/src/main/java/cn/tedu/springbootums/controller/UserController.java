@@ -46,9 +46,10 @@ public class UserController {
 		}
 		return jr;
 	}
+	
 	@RequestMapping("/")
 	public JsonResult<Void> get(){
-		return new JsonResult<>();
+		return new JsonResult<>(2000);
 	}
 	
 }
