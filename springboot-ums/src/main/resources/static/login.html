@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>登录页面</title>
+</head>
+<body>
+	<form id="form-login">
+		请输入用户名:<input name="username">
+		<span id="span-username" style="color:red;"></span><br>
+		请输入密码:<input name="password">
+		<span id="span-password" style="color:red;"></span><br>
+		<input id="btn-login" type="button" value="登录">
+	</form>
+	<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+	<script type="text/javascript">
+		$("#btn-login").click(function(){
+			$("#span-password").html("");
+			$("#span-username").html("");
+			$.ajax({
+				"url":"user/handle_login",
+				"data":$("#form-login").serialize(),
+				"type":"post",
+				"dataType":"json",
+				"success":function(json){
+					if(json.state==1){
+						location.href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561571307191&di=40db7e60e7e2268765c7986a282ee9f6&imgtype=0&src=http%3A%2F%2Fs1.sinaimg.cn%2Fmw690%2F006fmRRJzy745Jb6KxG00%26690";
+					}else if(json.state==2){
+						$("#span-password").html(json.message);
+					}else{
+						$("#span-username").html(json.message);
+					}
+				}
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>注册页面</title>
+</head>
+<body>
+	<form id="form-reg">
+		请输入用户名:<input name="username">
+		<span id="span-username" style="color:red;"></span><br>
+		请输入密码:<input name="password"><br>
+		请输入年龄:<input name="age"><br>
+		请输入手机号:<input name="phone"><br>
+		请输入邮箱:<input name="email"><br>
+		<input id="btn-reg" type="button" value="注册">
+	</form>
+	<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+	<script type="text/javascript">
+		$("#btn-reg").click(function(){
+			$("#span-username").html("");
+			$.ajax({
+				"url":"user/handle_register",
+				"data":$("#form-reg").serialize(),
+				"type":"post",
+				"dataType":"json",
+				"success":function(json){
+					if(json.state==1){
+						location.href="login.html";
+					}else{
+						$("#span-username").html(json.message);
+					}
+				}
+			});
+		});
+	</script>
+</body>
+</html>
